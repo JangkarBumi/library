@@ -1,5 +1,8 @@
 let myLibrary = []
 
+let counter = -1;
+
+
 function Book(title,author,pages,read) {
 this.title =     title
 this.author = author
@@ -10,19 +13,11 @@ this.info = function () {
 }    
 }
 
+
+
 function addBookToLibrary() {
   // do stuff here
 }
-
-const book1 = new Book('Lord of the rings','JRR Tolkien',479,'yes')
-
-myLibrary.push(book1)
-
-
-const book2 = new Book('War and Peace','Unk Author',400,'no')
-
-myLibrary.push(book2)
-
 
 function render() {
 
@@ -31,24 +26,35 @@ function render() {
         const title = document.createElement('div');
         title.innerHTML = myLibrary[i].title;
         document.querySelector('.container').appendChild(title);
+        title.setAttribute('id', counter)
 
         const author = document.createElement('div');
         author.innerHTML = myLibrary[i].author;
         document.querySelector('.container').appendChild(author);
+        author.setAttribute('id', counter)
 
         const pages = document.createElement('div');
         pages.innerHTML = myLibrary[i].pages;
         document.querySelector('.container').appendChild(pages);
+        pages.setAttribute('id', counter)
 
         const read = document.createElement('div');
         read.innerHTML = myLibrary[i].read;
         document.querySelector('.container').appendChild(read);
+        read.setAttribute('id', counter)
 
         const del= document.createElement('button');
         del.innerHTML = 'delete'
         document.querySelector('.container').appendChild(del);
+        del.setAttribute('id', counter)
+        del.addEventListener("click", function () {
+          demo(counter,1)
+        }
+        );
     }
 }
+
+
 
 
 
@@ -65,13 +71,18 @@ let read = document.getElementById("read").value;
 const book3= new Book(title,author,pages,read)
 
     myLibrary.push(book3)
-
+    counter++
     render()
 }
 
-function demo () {
-    myLibrary[0] = []
-    myLibrary[1] = []
+function demo (counter,element) {
+  myLibrary.splice(counter,element)
 
-    render()
+  for(let i=0;i<5;i++){
+  var elem = document.getElementById(counter);
+  elem.remove();
 }
+}
+
+
+
